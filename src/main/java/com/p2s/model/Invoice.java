@@ -1,10 +1,11 @@
 package com.p2s.model;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,21 +60,28 @@ public class Invoice {
 
 	@Transient
 	private String invoicePendingAmount;
-	
-	/**
-	 * Many to one used when we need to show all the information of this table using foreign key
-	 * @param name = primary key of this table
-	 * @param referencedColumn = primary key of the referenced table
-	 */
-	
-	@ManyToOne
-	@JoinColumn(name="id" , referencedColumnName="id",insertable = false, updatable = false)
-	private Customer customer;
 
 	/**
-	 * @param mappedBy= by what name is the primary key of this table saved on the other table
+	 * Many to one used when we need to show all the information of this table using
+	 * foreign key
+	 * 
+	 * @param name
+	 *            = primary key of this table
+	 * @param referencedColumn
+	 *            = primary key of the referenced table
 	 */
-	@OneToMany(mappedBy="invoiceId")
-	private List<Payment> payment;
+
+//	@ManyToOne
+//	@JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
+//	private Customer customer;
+
+	/**
+	 * @param mappedBy=
+	 *            by what name is the primary key of this table saved on the other
+	 *            table
+	 */
+	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "invoiceId")
+	@Transient
+	private Set<Payment> listOfpayment;
 
 }

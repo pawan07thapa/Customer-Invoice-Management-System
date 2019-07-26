@@ -28,14 +28,14 @@
 		</div>
 		<div class="text-center">
 			<form>
-				<select id="customerId"
+				<select id="customerId" onchange="getAllInvoices(${customer.id})"
 					style="margin-bottom: 15px; padding-bottom: 15px; padding-top: 0px; margin-top: 0px;">
 					<option value="0"> Customer Id </option>
 					<c:forEach var="customer" items="${customers}" varStatus="loop">
 						<option style="text-align: center;"> ${customer.id}</option>
 					</c:forEach>
 				</select> 
-				<input type="button" value="Apply" onclick="getAllInvoices()">
+				<input type="button" value="Apply" >
 				<input type="reset" value="Reset">
 				<div class="text-danger">
 					<span id="customerIdValidationMessage"></span>
@@ -45,13 +45,15 @@
 
 		<div class="text-center">
 			<form>
-				<select id="invoiceId"
+				<select id="invoiceId" onchange="getPendingAmount()"
 					style="margin-bottom: 15px; padding-bottom: 15px; padding-top: 0px; margin-top: 0px;">
 					<option value="0"> Invoice Id </option>
 					<c:forEach var="invoice" items="${invoices}" varStatus="loop">
 						<option style="text-align: center;"> ${invoice.id}</option>
 					</c:forEach>
-				</select> <input type="reset" value="Reset">
+				</select> 
+				<input type="button" value="Apply" onclick="getPendingAmount()">
+				<input type="reset" value="Reset">
 				<div class="text-danger">
 					<span id="invoiceIdValidationMessage"></span>
 				</div>

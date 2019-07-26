@@ -1,15 +1,17 @@
 package com.p2s.model;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -52,11 +54,14 @@ public class Customer {
 
 	@Column(name = "modified_on")
 	private Timestamp modifiedOn;
-	
+
 	/**
-	 * @param mappedBy= by what name is the primary key of this table saved on the other table
+	 * @param mappedBy=
+	 *            by what name is the primary key of this table saved on the other
+	 *            table
 	 */
-	@OneToMany(mappedBy="customerId")
-	private List<Invoice> listOfInvoice;
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customerId")
+	 @Transient
+	private Set<Invoice> listOfInvoice;
 
 }

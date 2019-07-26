@@ -202,8 +202,7 @@ function deleteCustomer(id) {
 		dataType : 'json',
 		contentType : 'application/json',
 		success : function(data) {
-			$('#messageAlert').html(data.message);
-			$('#messageAlert').show();
+			$("#messageAlert").text('Customer with id ' + id + " deleted successfully. ").show().delay(1000).fadeOut();;
 		},
 		error : function(XMLHttpRequest, data, message) {
 			console.log("Error......");
@@ -211,7 +210,6 @@ function deleteCustomer(id) {
 			$('#failedMessageAlert').show();
 		}
 	});
-	$("#messageAlert").text('Customer with id ' + id + " deleted successfully. ");
 }
 
 /**
@@ -244,7 +242,7 @@ function update(id) {
 		contentType : 'application/json',
 		data : JSON.stringify(customer),
 		success : function(data) {
-			$('#messageAlert').text(data.message);
+			$('#messageAlert').text(data.message).show().delay(2000).fadeOut();
 			$('#messageAlert').show();
 		},
 		error : function(XMLHttpRequest, data, message) {
@@ -253,6 +251,6 @@ function update(id) {
 			$('#failedMessageAlert').show();
 		}
 	});
-//	$("#messageAlert").text("Customer with id " + id + " updated successfully.");
+	//$("#messageAlert").text("Customer with id " + id + " updated successfully.").show().delay(2000).fadeOut();;
 }
 

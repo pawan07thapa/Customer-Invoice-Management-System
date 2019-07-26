@@ -78,6 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
 		logger.info("Fetching customer using with id " + customerId);
 		Customer customer = repo.findOne(customerId);
 		if (customer != null) {
+			customer.setListOfInvoice(null);
 			return new ResponseDto("Customer fetched successfully. ", 0, 1, customer, Constant.SUCCESS);
 		} else {
 			return new ResponseDto("Customer fetch failed. ", 0, 0, null, Constant.FAILED);
@@ -117,7 +118,7 @@ public class CustomerServiceImpl implements CustomerService {
 			logger.info("Customer fetched successfully");
 			logger.info("Checking if customer values are edited. ");
 			String message = validateCustomer(customer);
-			//if message is empty means customer is validated
+			// if message is empty means customer is validated
 			if (message.isEmpty()) {
 				boolean isUpdated = setCustomerIfValuesUpdated(customerInDB, customer);
 				if (isUpdated) {

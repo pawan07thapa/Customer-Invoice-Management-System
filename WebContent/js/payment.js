@@ -127,9 +127,10 @@ function deletePayment(id) {
  * Fetches all the customer from db from backend and populates the Invoice Dropdown
  * 
  */
-function getAllInvoices(){
+function getAllInvoices(id){
 	$.ajax({
-		url : ctx+"/",
+		// url still not fixed. get invoices by CustomerId
+		url : ctx+"/invoices/"+id,
 		type :"GET",
 		async :false,
 		dataType: 'json',
@@ -155,5 +156,8 @@ function getAllInvoices(){
 			$('#messageAlert').text(data.message).show().delay(2000).fadeOut();
 		}
 	});
+}
+function getPendingAmount(){
+	
 }
 

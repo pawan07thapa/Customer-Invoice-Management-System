@@ -52,8 +52,8 @@ public class Payment {
 	 * @param name = primary key of this table
 	 * @param referencedColumn = primary key of the referenced table
 	 */
-	@ManyToOne
-	@JoinColumn(name="id",referencedColumnName="id", insertable=false , updatable=false)
-	private Invoice invoice;
+//	@ManyToOne
+//	@JoinColumn(name="id",referencedColumnName="id", insertable=false , updatable=false)
+//	private Invoice invoice;
 
 }
