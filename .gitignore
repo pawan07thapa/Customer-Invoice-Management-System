@@ -1,5 +1,6 @@
 HELP.md
 target/
+wardir/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/traget/
