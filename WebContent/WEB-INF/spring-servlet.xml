@@ -15,7 +15,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 <mvc:default-servlet-handler/>
 <mvc:annotation-driven/>  <!--  enables all the annotations -->
 <ctx:annotation-config></ctx:annotation-config>
-<ctx:component-scan base-package="com.p2s"></ctx:component-scan>
+<ctx:component-scan base-package="com.pawan"></ctx:component-scan>
 
 <!--  <mvc:default-servlet-handler/> -->
 </beans>
