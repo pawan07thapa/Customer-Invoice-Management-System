@@ -24,8 +24,12 @@ public class InvoiceServiceImpl {
 
 	private static Logger logger = LoggerFactory.getLogger(InvoiceServiceImpl.class);
 
-	@Autowired
-	private InvoiceRepository repo;
+
+	private InvoiceRepository invoiceRepository;
+
+	InvoiceServiceImpl(InvoiceRepository invoiceRepository){
+		this.invoiceRepository=invoiceRepository;
+	}
 
 	/**
 	 * saves the invoice in the repository
@@ -43,7 +47,7 @@ public class InvoiceServiceImpl {
 		} else {
 			invoice.setCreatedBy("Pawan Thapa");
 			invoice.setModifiedBy("Pawan Thapa");
-			repo.save(invoice);
+			invoiceRepository.save(invoice);
 			logger.info("Saving invoice successful. ");
 			return new ResponseDto("Invoice added successfully. ", 0, 0, invoice, Constant.SUCCESS);
 		}
@@ -80,7 +84,7 @@ public class InvoiceServiceImpl {
 	 */
 	public ResponseDto getInvoiceById(int invoiceId) {
 		logger.info("Fetching invoice using with id " + invoiceId);
-		Invoice invoice = repo.findById(invoiceId).orElse(null);
+		Invoice invoice = invoiceRepository.findById(invoiceId).orElse(null);
 		if (invoice != null) {
 			logger.info("Fetching invoice using with id " + invoiceId + " successful. ");
 			return new ResponseDto("Invoice fetched successfully. ", 0, 1, invoice, Constant.SUCCESS);
@@ -99,7 +103,7 @@ public class InvoiceServiceImpl {
 	 */
 	public ResponseDto getInvoicesByCustomerId(int customerId) {
 		logger.info("Fetching list of Invoices using customer id started. ");
-		List<Invoice> listOfInvoices = repo.findByCustomerId(customerId);
+		List<Invoice> listOfInvoices = invoiceRepository.findByCustomerId(customerId);
 		logger.info("Fetching invoice list using customer id successful. ");
 		return new ResponseDto("Fetching invoice list using customer id successful. ", 0, 0, listOfInvoices,
 				Constant.SUCCESS);
@@ -114,7 +118,7 @@ public class InvoiceServiceImpl {
 	
 	public List<Invoice> getAllInvoices() {
 		logger.info("Fetching all invoices. ");
-		List<Invoice> listOfInvoices = repo.findAll();
+		List<Invoice> listOfInvoices = invoiceRepository.findAll();
 		logger.info("Fetching invoices successful");
 		return listOfInvoices;
 	}
@@ -129,12 +133,12 @@ public class InvoiceServiceImpl {
 	
 	public ResponseDto deleteInvoiceById(int invoiceId) {
 		logger.info("Deletion with  invoiceId " + invoiceId + " started");
-		if (repo.findById(invoiceId).orElse(null) == null) {
+		if (invoiceRepository.findById(invoiceId).orElse(null) == null) {
 			logger.info("Invoice does  not exist. ");
 			return new ResponseDto("Invoice does not exist. ", 0, 0, null, Constant.FAILED);
 		} else {
 			logger.info("Invoice found. ");
-			repo.deleteById(invoiceId);
+			invoiceRepository.deleteById(invoiceId);
 			logger.info("Deletion of invoiceId " + invoiceId + " done");
 			return new ResponseDto("Invoice deleted successfully. ", 0, 0, null, Constant.SUCCESS);
 		}
@@ -153,7 +157,7 @@ public class InvoiceServiceImpl {
 		List<String> status = new ArrayList<>();
 		status.add("Pending");
 		status.add("Partially pending");
-		Invoice invoice = repo.findByCustomerIdAndStatusIn(customerId, status);
+		Invoice invoice = invoiceRepository.findByCustomerIdAndStatusIn(customerId, status);
 		if (invoice == null) {
 			logger.info("fetching invoices by id ans status failed. ");
 			return new ResponseDto("Fetching invoice failed. ", 0, 0, null, Constant.FAILED);
@@ -172,6 +176,6 @@ public class InvoiceServiceImpl {
 	
 	public List<Integer> getAllDistinctCustomerId(){
 		logger.info("fetching customer id started. ");
-		return repo.findDistictCustomers();
+		return invoiceRepository.findDistictCustomers();
 	}
 }

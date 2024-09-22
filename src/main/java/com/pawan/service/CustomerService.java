@@ -17,8 +17,11 @@ public class CustomerService {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
-	@Autowired
-	private CustomerRepository repo;
+	private final CustomerRepository customerRepository;
+	CustomerService(CustomerRepository customerRepository){
+		this.customerRepository=customerRepository;
+
+	}
 
 	/**
 	 * saves the customer to the repository
@@ -35,7 +38,7 @@ public class CustomerService {
 		} else {
 			customer.setCreatedBy("Pawan Thapa");
 			customer.setModifiedBy("Pawan Thapa");
-			repo.save(customer);
+			customerRepository.save(customer);
 			logger.info("Customer saved");
 			return new ResponseDto("Customer added successfully. ", 0, 1, customer, Constant.SUCCESS);
 		}
@@ -77,7 +80,7 @@ public class CustomerService {
 	
 	public ResponseDto getCustomerById(int customerId) {
 		logger.info("Fetching customer using with id " + customerId);
-		Customer customer = repo.findById(customerId).orElse(null);
+		Customer customer = customerRepository.findById(customerId).orElse(null);
 		if (customer != null) {
 			return new ResponseDto("Customer fetched successfully. ", 0, 1, customer, Constant.SUCCESS);
 		} else {
@@ -94,7 +97,7 @@ public class CustomerService {
 	
 	public List<Customer> getAllCustomer() {
 		logger.info("fetching customer list started");
-		List<Customer> listOfCustomers = repo.findAll();
+		List<Customer> listOfCustomers = customerRepository.findAll();
 		logger.info("fetching customer list finished");
 		return listOfCustomers;
 	}
@@ -112,7 +115,7 @@ public class CustomerService {
 	
 	public ResponseDto updateCustomer(Customer customer) {
 		logger.info("Fetching customer to be updated");
-		Customer customerInDB = repo.findById(customer.getId()).orElse(null);
+		Customer customerInDB = customerRepository.findById(customer.getId()).orElse(null);
 
 		if (customerInDB != null) {
 			logger.info("Customer fetched successfully");
@@ -123,7 +126,7 @@ public class CustomerService {
 				boolean isUpdated = setCustomerIfValuesUpdated(customerInDB, customer);
 				if (isUpdated) {
 					logger.info("Customer values are edited ");
-					repo.save(customerInDB);
+					customerRepository.save(customerInDB);
 					logger.info("Customer values are updated in DB  ");
 					return new ResponseDto("Updated successfully. ", 0, 1, customerInDB, Constant.SUCCESS);
 				} else {
@@ -204,12 +207,12 @@ public class CustomerService {
 	
 	public ResponseDto deleteCustomerById(Integer id) {
 		logger.info("Deletion with id " + id + " started");
-		if (repo.findById(id).orElse(null) == null) {
+		if (customerRepository.findById(id).orElse(null) == null) {
 			logger.info("Customer does  not exist. ");
 			return new ResponseDto("Customer does not exist. ", 0, 0, null, Constant.FAILED);
 		} else {
 			logger.info("Customer found. ");
-			repo.deleteById(id);
+			customerRepository.deleteById(id);
 			logger.info("Deletion of id " + id + " done");
 			return new ResponseDto("Customer deleted successfully. ", 0, 0, null, Constant.SUCCESS);
 		}

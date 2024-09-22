@@ -25,11 +25,15 @@ public class PaymentServiceImpl  {
 
 	private static Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
-	@Autowired
-	private PaymentRepository repo;
 
-	@Autowired
-	private InvoiceRepository invoiceRepo;
+	private final PaymentRepository paymentRepository;
+
+
+	private final InvoiceRepository invoiceRepository;
+	PaymentServiceImpl(PaymentRepository paymentRepository, InvoiceRepository invoiceRepository){
+		this.invoiceRepository=invoiceRepository;
+		this.paymentRepository=paymentRepository;
+	}
 
 	/**
 	 * saves the payment in the repository
@@ -46,7 +50,7 @@ public class PaymentServiceImpl  {
 		} else {
 			payment.setCreatedBy("Pawan Thapa");
 			payment.setModifiedBy("Pawan Thapa");
-			repo.save(payment);
+			paymentRepository.save(payment);
 			logger.info("Saving payment successful. ");
 			return new ResponseDto("Payment added successfully. ", 0, 0, payment, Constant.SUCCESS);
 		}
@@ -96,7 +100,7 @@ public class PaymentServiceImpl  {
 	
 	public ResponseDto getPaymentById(int paymentId) {
 		logger.info("Fetching payment using with id " + paymentId);
-		Payment payment = repo.findById(paymentId).orElse(null);
+		Payment payment = paymentRepository.findById(paymentId).orElse(null);
 		if (payment != null) {
 			logger.info("Fetching payment using with id " + paymentId + " successful. ");
 			return new ResponseDto("Payment fetched successfully. ", 0, 1, payment, Constant.SUCCESS);
@@ -114,7 +118,7 @@ public class PaymentServiceImpl  {
 	 */
 	public List<Payment> getAllPayments() {
 		logger.info("Fetching all payments. ");
-		List<Payment> listOfPayments = repo.findAll();
+		List<Payment> listOfPayments = paymentRepository.findAll();
 		logger.info("Fetching payments successful. ");
 		return listOfPayments;
 	}
@@ -129,12 +133,12 @@ public class PaymentServiceImpl  {
 	
 	public ResponseDto deletePaymentById(int paymentId) {
 		logger.info("Deletion with  paymentId " + paymentId + " started");
-		if (repo.findById(paymentId) == null) {
+		if (paymentRepository.findById(paymentId) == null) {
 			logger.info("Payment does  not exist. ");
 			return new ResponseDto("Payment does not exist. ", 0, 0, null, Constant.FAILED);
 		} else {
 			logger.info("Payment found. ");
-			repo.deleteById(paymentId);
+			paymentRepository.deleteById(paymentId);
 			logger.info("Deletion of paymentId " + paymentId + " done");
 			return new ResponseDto("Payment deleted successfully. ", 0, 0, null, Constant.SUCCESS);
 		}

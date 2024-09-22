@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "payment")
+@Table(name = "payment", schema = "cmis")
 public class Payment {
 
 	@Id

@@ -1,0 +1,19 @@
+spring:
+  profile:
+    active: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cmis
+    username: user
+    password: password
+
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto:update
+
+
+
+
+

@@ -60,7 +60,7 @@ public interface PaymentController {
 	 * fetches the payment using PaymentId , adds it to ModelAndView Object. Used to
 	 * show detail of an individual payment
 	 * 
-	 * @param id
+	 * @param paymentId
 	 * @return ModelAndView
 	 * @author pawanthapa
 	 */
@@ -80,7 +80,7 @@ public interface PaymentController {
 	 * Adds all the payments to ModelAndView object and displays them in
 	 * Payments.jsp
 	 * 
-	 * @param Payment
+	 * @param
 	 * @return ModelAndView
 	 * @author pawanthapa
 	 */
@@ -90,7 +90,7 @@ public interface PaymentController {
 	/**
 	 * deletes payment using paymentId
 	 * 
-	 * @param id
+	 * @param paymentId
 	 * @return ResponseEntity<ResponseDto>
 	 * @author pawanthapa
 	 */
