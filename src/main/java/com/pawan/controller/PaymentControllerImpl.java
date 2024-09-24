@@ -32,11 +32,14 @@ public class PaymentControllerImpl implements PaymentController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PaymentControllerImpl.class);
 
-	@Autowired
-	private PaymentServiceImpl paymentService;
 
-	@Autowired
-	private CustomerService customerService;
+	private final PaymentServiceImpl paymentService;
+	private final CustomerService customerService;
+
+	 PaymentControllerImpl(PaymentServiceImpl paymentService, CustomerService customerService) {
+		this.paymentService = paymentService;
+		this.customerService = customerService;
+	}
 
 	/**
 	 * This method directs the payment towards the addPayment form

@@ -35,11 +35,13 @@ public class InvoiceControllerImpl implements InvoiceController {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(InvoiceControllerImpl.class);
 
-	@Autowired
-	private InvoiceServiceImpl invoiceService;
-	
-	@Autowired
-	private CustomerService customerService;
+	private final InvoiceServiceImpl invoiceService;
+	private final CustomerService customerService;
+
+	public InvoiceControllerImpl(InvoiceServiceImpl invoiceService, CustomerService customerService) {
+		this.invoiceService = invoiceService;
+		this.customerService = customerService;
+	}
 
 	/**
 	 * This method directs the invoice towards the addInvoice form
@@ -146,7 +148,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 	 * Invoices.jsp. By default this will be the view and after
 	 * applying customerId filter we will be calling another API
 	 * 
-	 * @param Invoice
+	 * @param
 	 * @return ModelAndView
 	 * @author pawanthapa
 	 */
@@ -165,7 +167,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 	/**
 	 * Updates the information about invoice
 	 * 
-	 * @param Invoice
+	 * @param invoice
 	 * @return ResponseEntity<ResponseDto>
 	 * @author pawanthapa
 	 */

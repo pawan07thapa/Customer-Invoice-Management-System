@@ -14,11 +14,13 @@ public class HomeControllerImpl implements HomeController {
 
 	private static Logger logger = LoggerFactory.getLogger(HomeControllerImpl.class);
 
-	@Autowired
-	private CustomerService customerService;
-	
-	@Autowired
-	private InvoiceServiceImpl invoiceService;
+	private final CustomerService customerService;
+	private final InvoiceServiceImpl invoiceService;
+
+	public HomeControllerImpl(CustomerService customerService, InvoiceServiceImpl invoiceService) {
+		this.customerService = customerService;
+		this.invoiceService = invoiceService;
+	}
 
 	/**
 	 * This acts as the Home page, all the default requests are directed here All

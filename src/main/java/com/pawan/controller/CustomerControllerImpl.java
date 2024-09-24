@@ -24,8 +24,11 @@ public class CustomerControllerImpl {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(CustomerControllerImpl.class);
 
-	@Autowired
-	private CustomerService customerService;
+	private final CustomerService customerService;
+
+	 CustomerControllerImpl(CustomerService customerService) {
+		this.customerService = customerService;
+	}
 
 	/**
 	 * This method directs the customer towards the addCustomer form
