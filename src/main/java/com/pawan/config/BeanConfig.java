@@ -11,14 +11,14 @@ import javax.sql.DataSource;
 public class BeanConfig {
 
 
-    @Bean
-    public DataSource getDataSource() {
-        return DataSourceBuilder.create()
-                .driverClassName("org.postgresql.Driver")
-                .url("jdbc:postgresql://localhost:5432/cmis")
-                .username("user")
-                .password("password")
-                .build();
-    }
+//    @Bean
+//    public DataSource getDataSource() {
+//        return DataSourceBuilder.create()
+//                .driverClassName("org.postgresql.Driver")
+//                .url("jdbc:postgresql://localhost:5432/cmis")
+//                .username("user")
+//                .password("password")
+//                .build();
+//    }
 
 }

@@ -3,18 +3,23 @@ package com.pawan.model;
 import java.sql.Timestamp;
 import java.util.List;
 
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-import lombok.Data;
 
 @Data // for lombok
 @Entity
 @Table(name = "invoice", schema = "cmis")
 public class Invoice {
-
+	// Add missing setters and getters for compatibility
+	public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
+	public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
+	public int getCustomerId() { return customerId; }
+	public java.sql.Timestamp getInvoiceDate() { return invoiceDate; }
+	public java.sql.Timestamp getInvoiceDueDate() { return invoiceDueDate; }
+	public String getInvoiceAmount() { return invoiceAmount; }
+	public int getId() { return id; }
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -60,14 +65,6 @@ public class Invoice {
 	 * @param referencedColumn = primary key of the referenced table
 	 */
 	
-	@ManyToOne
-	@JoinColumn(name="id" , referencedColumnName="id",insertable = false, updatable = false)
-	private Customer customer;
 
-	/**
-	 * @param mappedBy= by what name is the primary key of this table saved on the other table
-	 */
-	@OneToMany(mappedBy="invoiceId")
-	private List<Payment> payment;
 
 }

@@ -9,11 +9,18 @@ import lombok.Data;
 
 import lombok.Data;
 
+
 @Data
 @Entity
 @Table(name = "payment", schema = "cmis")
 public class Payment {
-
+	// Add missing setters and getters for compatibility
+	public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
+	public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
+	public int getCustomerId() { return customerId; }
+	public int getInvoiceId() { return invoiceId; }
+	public String getPaymentVoucher() { return paymentVoucher; }
+	public int getId() { return id; }
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -43,13 +50,5 @@ public class Payment {
 	@Column(name = "modified_on")
 	private Timestamp modifiedOn;
 
-	/**
-	 * Many to one used when we need to show all the information of this table using foreign key
-	 * @param name = primary key of this table
-	 * @param referencedColumn = primary key of the referenced table
-	 */
-	@ManyToOne
-	@JoinColumn(name="id",referencedColumnName="id", insertable=false , updatable=false)
-	private Invoice invoice;
-
 }
+

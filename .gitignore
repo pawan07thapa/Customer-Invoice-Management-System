@@ -1,36 +1,40 @@
-HELP.md
-target/
-wardir/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/traget/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-
-### Intellij IDEA ###
-.idea
-*.iws
+# Maven and Java
+/target/
+*.log
+*.class
+*.jar
+*.war
 *.iml
+
+# IDEs
+.idea/
+*.iws
 *.ipr
-*.DS_Store
+*.iml
+*.swp
+.DS_Store
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# OS
+Thumbs.db
+.DS_Store
 
-### VS Code ####
+# Docker
+*.pid
+postgres_data/
+
+# VSCode
 .vscode/
+
+# Node/npm (if any)
+node_modules/
+
+# Misc
+*.tmp
+*.bak
+*.orig
+
+# Ignore database dumps
+*.sql
+!src/main/resources/schema-postgresql.sql
+!src/main/resources/insert-customers.sql
+!src/main/resources/triggers-functions.sql

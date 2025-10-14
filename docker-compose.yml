@@ -1,6 +1,21 @@
 version: "3.8"
 
 services:
+  app:
+    build: .
+    container_name: cmis_app
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cmis
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    # Uncomment if you want to use a local Maven repo for faster builds
+    # volumes:
+    #   - ~/.m2:/root/.m2
   postgres:
     image: postgres
     container_name: my_postgres
@@ -20,8 +35,6 @@ services:
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
-
-
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "8081:80"
