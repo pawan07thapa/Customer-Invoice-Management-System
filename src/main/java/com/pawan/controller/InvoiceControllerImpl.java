@@ -53,7 +53,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 	public ModelAndView addInvoice() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("customers", customerService.getAllCustomer());
-		mv.setViewName("addInvoice.jsp");
+		mv.setViewName("addInvoice");
 		logger.info("Directed to addInvoice form. ");
 		return mv;
 	}
@@ -116,7 +116,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 		logger.info("Adding invoice data to model. ");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("invoice", invoiceService.getInvoiceById(invoiceId).getData());
-		mv.setViewName("invoiceDetail.jsp");
+		mv.setViewName("invoiceDetail");
 		logger.info("Directed to invoiceDetail.jsp. ");
 		return mv;
 	}
@@ -159,7 +159,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 		mv.addObject("listOfInvoices", invoiceService.getAllInvoices());
 		mv.addObject("customers" ,customerService.getAllCustomer());
 //		mv.addObject("customers" ,invoiceService.getAllDistinctCustomerId());
-		mv.setViewName("invoices.jsp");
+		mv.setViewName("invoices");
 		logger.info("Invoice data added. ");
 		return mv;
 	}
@@ -204,7 +204,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 	public ModelAndView displayAllInvoices() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("listOfInvoices", invoiceService.getAllInvoices());
-		mv.setViewName("invoices.jsp");
+		mv.setViewName("invoices");
 		return mv;
 	}
 	/**
@@ -217,7 +217,7 @@ public class InvoiceControllerImpl implements InvoiceController {
 		ModelAndView mv= new ModelAndView();
 		mv.addObject("invoices", invoiceService.getInvoicesByCustomerId(customerId).getData());
 		mv.addObject("customers", customerService.getAllCustomer());
-		mv.setViewName("../invoicesUsingCustomerId.jsp");
+		mv.setViewName("invoicesUsingCustomerId");
 		return mv;
 	}
 }

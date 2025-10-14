@@ -39,7 +39,7 @@ public class CustomerControllerImpl {
 	@RequestMapping("/addCustomer")
 	public ModelAndView addCustomer() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("addCustomer.jsp");
+		mv.setViewName("addCustomer");
 		logger.info("Directed to addCustomer form");
 		return mv;
 	}
@@ -104,7 +104,7 @@ public class CustomerControllerImpl {
 		logger.info("Adding customer data to model. ");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("customer", customerService.getCustomerById(customerId).getData());
-		mv.setViewName("customerDetail.jsp");
+		mv.setViewName("customerDetail");
 		logger.info("Directed to customerDetail.jsp. ");
 		return mv;
 	}
@@ -196,7 +196,7 @@ public class CustomerControllerImpl {
 		logger.info("Adding all customers data to model. ");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("listOfCustomers", customerService.getAllCustomer());
-		mv.setViewName("customers.jsp");
+		mv.setViewName("customers");
 		logger.info("Customers data added. ");
 		return mv;
 	}

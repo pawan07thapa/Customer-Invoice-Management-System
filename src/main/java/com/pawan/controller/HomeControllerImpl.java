@@ -35,7 +35,7 @@ public class HomeControllerImpl implements HomeController {
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView();
 		logger.info("Adding Customer Data to ModelAndView Object");
-		mv.setViewName("home.jsp");
+		mv.setViewName("home");
 		mv.addObject("customers", customerService.getAllCustomer());
 		mv.addObject("invoices" , invoiceService.getAllInvoices());
 		logger.info(" Customer Data added to ModelAndView Object");

@@ -52,7 +52,7 @@ public class PaymentControllerImpl implements PaymentController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("customers", customerService.getAllCustomer());
 		// Add invoice dropdown whose payments are pending or partially pending
-		mv.setViewName("addPayment.jsp");
+		mv.setViewName("addPayment");
 		logger.info("Directed to addPayment form. ");
 		return mv;
 	}
@@ -115,7 +115,7 @@ public class PaymentControllerImpl implements PaymentController {
 		logger.info("Adding payment data to model. ");
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("payment", paymentService.getPaymentById(paymentId).getData());
-		mv.setViewName("paymentDetail.jsp");
+		mv.setViewName("paymentDetail");
 		logger.info("Directed to paymentDetail.jsp. ");
 		return mv;
 	}
@@ -157,7 +157,7 @@ public class PaymentControllerImpl implements PaymentController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("listOfPayments", paymentService.getAllPayments());
 		mv.addObject("customers", customerService.getAllCustomer());
-		mv.setViewName("payments.jsp");
+		mv.setViewName("payments");
 		logger.info("Payment data added. ");
 		return mv;
 	}
