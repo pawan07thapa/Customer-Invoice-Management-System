@@ -16,22 +16,60 @@
 <body>
     <div class="container">
         <div class="jumbotron text-center">
-            <h1>🏢 Customer Invoice Management System</h1>
+            <h1><i class="fas fa-building"></i> Customer Invoice Management System</h1>
             <p class="lead">Manage your customers, invoices, and payments efficiently</p>
         </div>
 
-        <div class="row">
+        <!-- Statistics Cards -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: var(--primary-gradient);">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">${customers.size()}</div>
+                    <div class="stat-label">Total Customers</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background: var(--secondary-gradient);">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">${invoices.size()}</div>
+                    <div class="stat-label">Total Invoices</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background: var(--success-gradient);">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">${payments.size()}</div>
+                    <div class="stat-label">Total Payments</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Cards -->
+        <div class="row mt-4">
             <!-- Customer Management Card -->
             <div class="col-md-4">
                 <div class="management-card">
                     <h3><i class="fas fa-users"></i> Customer Management</h3>
                     <div class="text-center">
-                        <a href="${context}/addCustomer">➕ Add New Customer</a>
-                        <a href="${context}/showAllCustomers">📋 View All Customers</a>
+                        <a href="${context}/addCustomer" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add New Customer
+                        </a>
+                        <a href="${context}/showAllCustomers" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> View All Customers
+                        </a>
                     </div>
                     <div class="text-center" style="margin-top: 20px;">
                         <form id="customerDetailForm">
-                            <label style="font-weight: 600; color: #667eea;">Search Customer:</label>
+                            <label style="font-weight: 600; color: #667eea;"><i class="fas fa-search"></i> Search Customer:</label>
                             <select id="customerSelect" class="form-control" style="margin: 10px 0;">
                                 <option value="0" selected>Select Customer</option>
                                 <c:forEach var="customer" items="${customers}" varStatus="loop">
@@ -52,12 +90,16 @@
                 <div class="management-card">
                     <h3><i class="fas fa-file-invoice"></i> Invoice Management</h3>
                     <div class="text-center">
-                        <a href="${context}/addInvoice">➕ Add New Invoice</a>
-                        <a href="${context}/showAllInvoices">📋 View All Invoices</a>
+                        <a href="${context}/addInvoice" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add New Invoice
+                        </a>
+                        <a href="${context}/showAllInvoices" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> View All Invoices
+                        </a>
                     </div>
                     <div class="text-center" style="margin-top: 20px;">
                         <form id="invoiceDetailForm">
-                            <label style="font-weight: 600; color: #667eea;">Search Invoice:</label>
+                            <label style="font-weight: 600; color: #667eea;"><i class="fas fa-search"></i> Search Invoice:</label>
                             <select id="invoiceSelect" class="form-control" style="margin: 10px 0;">
                                 <option value="0">Select Invoice</option>
                                 <c:forEach var="invoice" items="${invoices}" varStatus="loop">
@@ -78,12 +120,16 @@
                 <div class="management-card">
                     <h3><i class="fas fa-credit-card"></i> Payment Management</h3>
                     <div class="text-center">
-                        <a href="${context}/addPayment">➕ Add New Payment</a>
-                        <a href="${context}/showAllPayments">📋 View All Payments</a>
+                        <a href="${context}/addPayment" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add New Payment
+                        </a>
+                        <a href="${context}/showAllPayments" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> View All Payments
+                        </a>
                     </div>
                     <div class="text-center" style="margin-top: 20px;">
                         <form id="paymentDetailForm">
-                            <label style="font-weight: 600; color: #667eea;">Search Payment:</label>
+                            <label style="font-weight: 600; color: #667eea;"><i class="fas fa-search"></i> Search Payment:</label>
                             <select id="paymentSelect" class="form-control" style="margin: 10px 0;">
                                 <option value="0">Select Payment</option>
                                 <c:forEach var="payment" items="${payments}" varStatus="loop">
@@ -99,38 +145,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Quick Stats Section -->
-        <div class="row" style="margin-top: 30px;">
-            <div class="col-md-12">
-                <div class="management-card">
-                    <h3 style="text-align: center;">📊 Quick Statistics</h3>
-                    <div class="row text-center" style="margin-top: 20px;">
-                        <div class="col-md-4">
-                            <div style="padding: 20px; background: #e3f2fd; border-radius: 10px;">
-                                <h2 style="color: #667eea; margin: 0;">${customers.size()}</h2>
-                                <p style="margin: 5px 0 0 0; font-weight: 600;">Total Customers</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div style="padding: 20px; background: #f3e5f5; border-radius: 10px;">
-                                <h2 style="color: #764ba2; margin: 0;">${invoices.size()}</h2>
-                                <p style="margin: 5px 0 0 0; font-weight: 600;">Total Invoices</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div style="padding: 20px; background: #e8f5e9; border-radius: 10px;">
-                                <h2 style="color: #28a745; margin: 0;">${payments.size()}</h2>
-                                <p style="margin: 5px 0 0 0; font-weight: 600;">Total Payments</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 </html>

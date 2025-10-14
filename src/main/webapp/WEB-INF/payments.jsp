@@ -11,7 +11,6 @@
 <script type="text/javascript">
     var ctx = "<%=request.getContextPath()%>";
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -37,8 +36,8 @@
                         <option value="${customer.id}">${customer.id} - ${customer.firstName} ${customer.lastName}</option>
                     </c:forEach>
                 </select>
-                <input type="button" value="Filter" onclick="getPaymentByCustomerId()" style="margin: 5px;">
-                <input type="reset" value="Reset" style="margin: 5px;">
+                <input type="button" value="Filter" onclick="getPaymentByCustomerId()" class="btn btn-primary" style="margin: 5px;">
+                <input type="reset" value="Reset" class="btn btn-secondary" style="margin: 5px;">
                 <div class="text-danger">
                     <span id="customerIdValidationMessage"></span>
                 </div>
@@ -61,14 +60,14 @@
                 <tbody>
                     <c:forEach items="${listOfPayments}" var="payment" varStatus="loop">
                         <tr id="id-${payment.id}">
-                            <td><strong>#${payment.id}</strong></td>
+                            <td><span class="badge badge-info">${payment.id}</span></td>
                             <td>${payment.customerId}</td>
                             <td><strong>${payment.invoiceNumber}</strong></td>
-                            <td>${payment.paymentVoucher}</td>
+                            <td><span class="badge badge-success">${payment.paymentVoucher}</span></td>
                             <td>${payment.paymentDate}</td>
                             <td style="color: #28a745; font-weight: 600;">$${payment.paymentAmount}</td>
                             <td>
-                                <button id="delete" onclick="deletePayment(${payment.id})" title="Delete Payment">
+                                <button id="delete" onclick="deletePayment(${payment.id})" title="Delete Payment" class="btn btn-danger">
                                     <i class="fas fa-trash"></i> Delete
                                 </button>
                             </td>
@@ -78,8 +77,14 @@
             </table>
         </div>
 
-        <div class="text-center" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-            <strong><i class="fas fa-list"></i> Total Payments: ${listOfPayments.size()}</strong>
+        <div class="stat-card" style="margin-top: 30px;">
+            <div class="stat-icon" style="background: var(--success-gradient);">
+                <i class="fas fa-list"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">${listOfPayments.size()}</div>
+                <div class="stat-label">Total Payments</div>
+            </div>
         </div>
     </div>
 </body>

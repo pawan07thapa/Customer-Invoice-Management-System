@@ -10,7 +10,6 @@
 <script type="text/javascript">
     var ctx = "<%=request.getContextPath()%>"; 
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -39,8 +38,8 @@
                         </option>
                     </c:forEach>
                 </select>
-                <input id="dropdownSubmit" type="button" value="Filter" onclick="getInvoiceByCustomerId()" style="margin: 5px;">
-                <input type="button" value="Clear Filter" onclick="window.location.href='${pageContext.request.contextPath}/showAllInvoices'" style="margin: 5px; background: #6c757d;">
+                <input id="dropdownSubmit" type="button" value="Filter" onclick="getInvoiceByCustomerId()" class="btn btn-primary" style="margin: 5px;">
+                <input type="button" value="Clear Filter" onclick="window.location.href='${pageContext.request.contextPath}/showAllInvoices'" class="btn btn-secondary" style="margin: 5px;">
                 <div class="text-danger">
                     <span id="customerIdValidationMessage"></span>
                 </div>
@@ -49,7 +48,7 @@
 
         <!-- Show filter info if filtered -->
         <c:if test="${not empty selectedCustomerId and selectedCustomerId != 0}">
-            <div class="alert" style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+            <div class="alert alert-warning">
                 <i class="fas fa-filter"></i> <strong>Filtered View:</strong> Showing invoices for customer ID #${selectedCustomerId}
             </div>
         </c:if>
@@ -71,7 +70,7 @@
             <tbody>
                 <c:forEach items="${listOfInvoices}" var="invoice" varStatus="loop">
                     <tr id="id-${invoice.id}">
-                        <td><strong>${invoice.id}</strong></td>
+                        <td><span class="badge badge-info">${invoice.id}</span></td>
                         <td>${invoice.customerId}</td>
                         <td><strong>${invoice.invoiceNumber}</strong></td>
                         <td>${invoice.invoiceDate}</td>
@@ -87,17 +86,17 @@
                         </td>
                         <td>
                             <c:if test="${invoice.status == 'PAID'}">
-                                <span style="background: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-weight: 600;">
+                                <span class="badge badge-success">
                                     <i class="fas fa-check-circle"></i> PAID
                                 </span>
                             </c:if>
                             <c:if test="${invoice.status == 'PENDING'}">
-                                <span style="background: #ffc107; color: white; padding: 5px 10px; border-radius: 5px; font-weight: 600;">
+                                <span class="badge badge-warning">
                                     <i class="fas fa-clock"></i> PENDING
                                 </span>
                             </c:if>
                             <c:if test="${invoice.status == 'OVERDUE'}">
-                                <span style="background: #dc3545; color: white; padding: 5px 10px; border-radius: 5px; font-weight: 600;">
+                                <span class="badge badge-danger">
                                     <i class="fas fa-exclamation-triangle"></i> OVERDUE
                                 </span>
                             </c:if>
@@ -106,7 +105,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <button id="delete" onclick="deleteInvoice(${invoice.id})" title="Delete Invoice">
+                            <button id="delete" onclick="deleteInvoice(${invoice.id})" title="Delete Invoice" class="btn btn-danger">
                                 <i class="fas fa-trash"></i> Delete
                             </button>
                         </td>

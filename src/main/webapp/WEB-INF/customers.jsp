@@ -10,7 +10,6 @@
 <script type="text/javascript">
     var ctx = "<%=request.getContextPath()%>"; 
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -27,7 +26,7 @@
             <span class="text-danger" id="failedMessageAlert"></span>
         </div>
 
-        <div class="alert alert-info" style="background: #e3f2fd; border: none; border-left: 4px solid #667eea; padding: 15px; margin-bottom: 20px;">
+        <div class="alert alert-info">
             <i class="fas fa-info-circle"></i> <strong>Tip:</strong> Click on any text in the table to modify data, then press 'Update' to save changes.
         </div>
 
@@ -47,7 +46,9 @@
             <tbody>
                 <c:forEach items="${listOfCustomers}" var="cus" varStatus="loop">
                     <tr id="id-${cus.id}">
-                        <td contenteditable="false"><strong>${cus.id}</strong></td>
+                        <td contenteditable="false">
+                            <span class="badge badge-info">${cus.id}</span>
+                        </td>
                         <td contenteditable="true" id="firstName${cus.id}">${cus.firstName}</td>
                         <td contenteditable="true" id="lasttName${cus.id}">${cus.lastName}</td>
                         <td contenteditable="true" id="address${cus.id}">${cus.address}</td>
@@ -55,10 +56,10 @@
                         <td contenteditable="true" id="email${cus.id}">${cus.email}</td>
                         <td contenteditable="true" id="company${cus.id}">${cus.company}</td>
                         <td>
-                            <button id="update" onclick="update(${cus.id})" title="Update Customer">
+                            <button id="update" onclick="update(${cus.id})" title="Update Customer" class="btn btn-primary" style="margin-right: 5px;">
                                 <i class="fas fa-save"></i> Update
                             </button>
-                            <button id="delete" onclick="deleteCustomer(${cus.id})" title="Delete Customer">
+                            <button id="delete" onclick="deleteCustomer(${cus.id})" title="Delete Customer" class="btn btn-danger">
                                 <i class="fas fa-trash"></i> Delete
                             </button>
                         </td>
