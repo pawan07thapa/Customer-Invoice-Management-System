@@ -561,3 +561,38 @@ table tbody td[contenteditable="true"]:focus {
 .p-2 { padding: 1rem; }
 .p-3 { padding: 1.5rem; }
 .p-4 { padding: 2rem; }
+
+/* Detail Row Styling */
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-gradient);
+    transition: all 0.3s ease;
+}
+
+.detail-row:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-md);
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 1rem;
+}
+
+.detail-label i {
+    margin-right: 8px;
+    color: #667eea;
+}
+
+.detail-value {
+    font-size: 1.1rem;
+    color: #212529;
+    font-weight: 500;
+}
