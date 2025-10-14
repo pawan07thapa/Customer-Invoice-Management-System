@@ -36,6 +36,9 @@ node_modules/
 *.bak
 *.orig
 
+# Legacy directories
+WebContent/
+
 # Ignore database dumps
 *.sql
 !src/main/resources/schema-postgresql.sql
