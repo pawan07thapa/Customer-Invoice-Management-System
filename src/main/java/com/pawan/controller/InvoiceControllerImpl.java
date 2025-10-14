@@ -208,16 +208,23 @@ public class InvoiceControllerImpl implements InvoiceController {
 		return mv;
 	}
 	/**
-	 * When customerId will be seleted from dropdown
-	 * submit -> eventListener->  call -> hits this API->returns data
+	 * Gets invoices filtered by customer ID
+	 * Returns to the same invoices.jsp view - JavaScript handles the filtering UI
+	 * REFACTORED: Removed separate invoicesUsingCustomerId.jsp - merged into invoices.jsp
 	 * 
+	 * @param customerId The customer ID to filter by
+	 * @return ModelAndView with filtered invoices
+	 * @author pawanthapa
 	 */
 	@Override
-	public ModelAndView getInvoicesByCustomerId(@PathVariable("id") int customerId){
-		ModelAndView mv= new ModelAndView();
-		mv.addObject("invoices", invoiceService.getInvoicesByCustomerId(customerId).getData());
+	public ModelAndView getInvoicesByCustomerId(@PathVariable("id") int customerId) {
+		logger.info("Fetching invoices for customer ID: {}", customerId);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("listOfInvoices", invoiceService.getInvoicesByCustomerId(customerId).getData());
 		mv.addObject("customers", customerService.getAllCustomer());
-		mv.setViewName("invoicesUsingCustomerId");
+		mv.addObject("selectedCustomerId", customerId); // Add selected customer for pre-selection in dropdown
+		mv.setViewName("invoices"); // CHANGED: Use invoices.jsp instead of invoicesUsingCustomerId.jsp
+		logger.info("Filtered invoices for customer: {}", customerId);
 		return mv;
 	}
 }

@@ -32,18 +32,27 @@
             <h3 style="text-align: center;"><i class="fas fa-filter"></i> Filter by Customer</h3>
             <form class="text-center">
                 <select id="customerId" class="form-control" style="width: 300px; display: inline-block; margin: 10px;">
-                    <option value="0">Select Customer</option>
+                    <option value="0" ${empty selectedCustomerId or selectedCustomerId == 0 ? 'selected' : ''}>All Customers</option>
                     <c:forEach var="customer" items="${customers}" varStatus="loop">
-                        <option value="${customer.id}">${customer.id} - ${customer.firstName} ${customer.lastName}</option>
+                        <option value="${customer.id}" ${selectedCustomerId == customer.id ? 'selected' : ''}>
+                            ${customer.id} - ${customer.firstName} ${customer.lastName}
+                        </option>
                     </c:forEach>
                 </select>
                 <input id="dropdownSubmit" type="button" value="Filter" onclick="getInvoiceByCustomerId()" style="margin: 5px;">
-                <input type="reset" value="Reset" style="margin: 5px;">
+                <input type="button" value="Clear Filter" onclick="window.location.href='${pageContext.request.contextPath}/showAllInvoices'" style="margin: 5px; background: #6c757d;">
                 <div class="text-danger">
                     <span id="customerIdValidationMessage"></span>
                 </div>
             </form>
         </div>
+
+        <!-- Show filter info if filtered -->
+        <c:if test="${not empty selectedCustomerId and selectedCustomerId != 0}">
+            <div class="alert" style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+                <i class="fas fa-filter"></i> <strong>Filtered View:</strong> Showing invoices for customer ID #${selectedCustomerId}
+            </div>
+        </c:if>
 
         <table class="table table-bordered">
             <thead>
