@@ -42,3 +42,4 @@ node_modules/
 !src/main/resources/insert-customers.sql
 !src/main/resources/triggers-functions.sql
 DEPLOYMENT.md
+REFACTORING-SUMMARY.md
