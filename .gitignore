@@ -8,6 +8,9 @@
 
 # IDEs
 .idea/
+.settings/
+.project
+.classpath
 *.iws
 *.ipr
 *.iml
@@ -38,3 +41,4 @@ node_modules/
 !src/main/resources/schema-postgresql.sql
 !src/main/resources/insert-customers.sql
 !src/main/resources/triggers-functions.sql
+DEPLOYMENT.md
